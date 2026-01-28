@@ -7,9 +7,9 @@ import { timeAgo } from "@/utils/date";
 import type { Post as PostI } from "@/store/slices/postSlice";
 
 const PostImageContainer = styled.div`
-	height: 353px;
+	height: calc(164px + (353 - 164) * ((100vw - 320px) / (1920 - 320)));
 	width: 100%;
-	border-bottom: 3px solid #1f1f1f;
+	border-bottom: calc(2px + 1 * ((100vw - 320px) / (1920 - 320))) solid #1f1f1f;
 	overflow: hidden;
 	img {
 		width: 100%;
@@ -39,34 +39,30 @@ const StyledPost = styled(Flex)<{ $isPostPage: boolean }>`
 `;
 
 const Title = styled.h2`
-	font-size: 24px;
+	font-size: calc(18px + 6 * ((100vw - 320px) / (1920 - 320)));
+	line-height: 1.25;
 	font-weight: 600;
 	color: #1f1f1f;
 `;
 
 const Text = styled.p`
-	font-size: 16px;
+	font-size: calc(12px + 4 * ((100vw - 320px) / (1920 - 320)));
 	line-height: 1.5;
 	color: rgba(31, 31, 31, 0.6);
 `;
 
-const AttachedImagesContainer = styled.div<{ $isPadding: boolean }>`
+const AttachedImagesContainer = styled.div`
 	overflow-x: auto;
 	max-width: 100%;
-	margin: 12px 24px;
-
-	${({ $isPadding }) =>
-		$isPadding &&
-		`
-		padding: 0 0 8px 0;
-	`}
+	margin: calc(8px + 4 * ((100vw - 320px) / (1920 - 320))) calc(16px + 8 * ((100vw - 320px) / (1920 - 320)));
+	padding: 0 0 8px 0;
 `;
 
 const AttachedImageContainer = styled.button`
 	background-color: transparent;
-	flex: 0 0 240px;
+	flex: 0 0 calc(108px + 132 * ((100vw - 320px) / (1920 - 320)));
 	aspect-ratio: 16/9;
-	border: 3px solid #1f1f1f;
+	border: calc(2px + 1 * ((100vw - 320px) / (1920 - 320))) solid #1f1f1f;
 	overflow: hidden;
 
 	img {
@@ -88,6 +84,7 @@ const AttachedImageContainer = styled.button`
 const Footer = styled(Flex)`
 	color: #727376;
 	line-height: 24px;
+	font-size: calc(12px + 2 * ((100vw - 320px) / (1920 - 320)));
 `;
 
 const Post: FC<PostI> = ({ postId, postImage, title, content, attachedImages, lastModified }) => {
@@ -152,13 +149,13 @@ const Post: FC<PostI> = ({ postId, postImage, title, content, attachedImages, la
 			onClick={() => !isPostPage(location) && navigate(`/posts/${postId}`)}
 			$isPostPage={isPostPage(location)}
 			$column
-			$border="3px solid #1f1f1f"
+			$border="calc(2px + 1 * ((100vw - 320px) / (1920 - 320))) solid #1f1f1f"
 			$bgc="#eff2f9"
 		>
 			<PostImageContainer onClick={(event) => openImageHandler(event, postImage)}>
 				<img src={postImage} />
 			</PostImageContainer>
-			<Flex $gap={16} $column $padding={24}>
+			<Flex $gap={16} $column $padding={"calc(12px + 12 * ((100vw - 320px) / (1920 - 320)))"}>
 				<Title>{title}</Title>
 				<Flex $gap={4} $column>
 					{content.map((p, index) => (
@@ -166,7 +163,7 @@ const Post: FC<PostI> = ({ postId, postImage, title, content, attachedImages, la
 					))}
 				</Flex>
 			</Flex>
-			<AttachedImagesContainer $isPadding={attachedImages.length > 3}>
+			<AttachedImagesContainer>
 				<Flex $gap={8}>
 					{attachedImages.map((image, index) => (
 						<AttachedImageContainer onClick={(event) => openImageHandler(event, image)} key={index}>

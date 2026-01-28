@@ -14,10 +14,10 @@ const LoaderContainer = styled(m.div)`
 
 const PostCounter = styled.div`
 	color: #23272e;
-	font-size: 20px;
+	font-size: calc(16px + 4 * ((100vw - 320px) / (1920 - 320)));
 	font-weight: 600;
-	padding: 20px;
-	border: 3px solid #1f1f1f;
+	padding: calc(12px + 8 * ((100vw - 320px) / (1920 - 320)));
+	border: calc(2px + 1 * ((100vw - 320px) / (1920 - 320))) solid #1f1f1f;
 	background-color: #e4ebf1;
 	align-self: flex-start;
 `;
@@ -33,7 +33,7 @@ const Posts: FC = () => {
 
 	return (
 		<AP>
-			<Container $padding={[50, 20]} $column>
+			<Container $padding={["calc(20px + 30 * ((100vw - 320px) / (1920 - 320)))", 20]} $column>
 				{posts.length > 0 ? (
 					<Flex $column $gap={32}>
 						<PostCounter>Всего постов: {posts.length}</PostCounter>

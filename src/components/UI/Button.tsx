@@ -9,11 +9,13 @@ interface ButtonProps {
 
 const StyledButton = styled(Flex).attrs({ as: "button" })`
 	font-weight: 500;
-	font-size: 18px;
+	font-size: calc(14px + 4 * ((100vw - 320px) / (1920 - 320)));
 	color: #eff2f9;
 	box-shadow:
-		inset -3px -3px 0 0 rgba(0, 0, 0, 0.4),
-		inset 3px 3px 0 0 rgba(244, 244, 244, 0.55);
+		inset calc(-2px + -1 * ((100vw - 320px) / (1920 - 320))) calc(-2px + -1 * ((100vw - 320px) / (1920 - 320))) 0 0
+			rgba(0, 0, 0, 0.4),
+		inset calc(2px + 1 * ((100vw - 320px) / (1920 - 320))) calc(2px + 1 * ((100vw - 320px) / (1920 - 320))) 0 0
+			rgba(244, 244, 244, 0.55);
 	text-shadow: 2px 2px #1f1f1f;
 	transition: 350ms;
 
@@ -30,7 +32,12 @@ const StyledButton = styled(Flex).attrs({ as: "button" })`
 
 const Button: FC<ButtonProps> = ({ handler, children }) => {
 	return (
-		<StyledButton $padding={[20, 24]} $border="3px solid #1f1f1f" $bgc="#6E808E" onClick={handler}>
+		<StyledButton
+			$padding={["calc(8px + 12 * ((100vw - 320px) / (1920 - 320)))", "calc(12px + 12 * ((100vw - 320px) / (1920 - 320)))"]}
+			$border="calc(2px + 1 * ((100vw - 320px) / (1920 - 320))) solid #1f1f1f"
+			$bgc="#6E808E"
+			onClick={handler}
+		>
 			{children}
 		</StyledButton>
 	);

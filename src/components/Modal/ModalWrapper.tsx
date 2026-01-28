@@ -50,7 +50,10 @@ const ModalWrapper: FC<ModalWrapperProps> = ({ name, isActive, isDefaultContent,
 								onClick={(event: React.MouseEvent) => event.stopPropagation()}
 								$bgc="#eff2f9"
 								$border="3px solid #1f1f1f"
-								$padding={40}
+								$padding={[
+									"calc(24px + 16 * ((100vw - 320px) / (1920 - 320)))",
+									"calc(20px + 20 * ((100vw - 320px) / (1920 - 320)))",
+								]}
 							>
 								{children}
 							</Flex>

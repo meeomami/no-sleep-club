@@ -13,7 +13,7 @@ export interface FlexProps {
 	$borderRadius?: number;
 	$gap?: GapProperty;
 	$margin?: number | string | [number | string, (number | string)?, (number | string)?, (number | string)?];
-	$padding?: number | [number, number?, number?, number?];
+	$padding?: number | string | [number | string, (number | string)?, (number | string)?, (number | string)?];
 	$bgc?: string;
 	$itemsInRow?: number;
 	children?: ReactNode;
@@ -38,7 +38,8 @@ const Flex = styled.div<FlexProps>`
 		$margin &&
 		`margin: ${typeof $margin === "number" ? `${$margin}px` : typeof $margin === "string" ? $margin : $margin.map((value) => (typeof value === "number" ? `${value}px` : value)).join(" ")}`};
 	${({ $padding }) =>
-		$padding && `padding: ${typeof $padding === "number" ? `${$padding}px` : $padding.map((value) => `${value}px`).join(" ")}`};
+		$padding &&
+		`padding: ${typeof $padding === "number" ? `${$padding}px` : typeof $padding === "string" ? $padding : $padding.map((value) => (typeof value === "number" ? `${value}px` : value)).join(" ")}`};
 	${({ $bgc }) => $bgc && `background-color: ${$bgc}`};
 	${({ $itemsInRow, $gap }) =>
 		$itemsInRow &&

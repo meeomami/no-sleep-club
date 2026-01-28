@@ -8,7 +8,11 @@ import Button from "./UI/Button";
 import { useActions } from "@/hooks/useActions";
 
 const StyledHeader = styled(Flex)`
-	border-bottom: 3px solid #1f1f1f;
+	border-bottom: calc(2px + 1 * ((100vw - 320px) / (1920 - 320))) solid #1f1f1f;
+`;
+
+const StyledLogo = styled.img`
+	width: calc(151px + 130 * ((100vw - 320px) / (1920 - 320)));
 `;
 
 const Header: FC = () => {
@@ -18,7 +22,7 @@ const Header: FC = () => {
 		<StyledHeader $padding={[28, 0, 20]} $bgc="#e4ebf1">
 			<Container $alignItems="center" $justifyContent="space-between">
 				<NavLink to="/">
-					<img src="/logo.png" />
+					<StyledLogo src="/logo.png" />
 				</NavLink>
 				<Button handler={() => setModalVisibility({ name: "authorization", visibility: true })}>Админка</Button>
 			</Container>
