@@ -18,7 +18,7 @@ const Header: FC = () => {
 		<StyledHeader $padding={[28, 0, 20]} $bgc="#e4ebf1">
 			<Container $alignItems="center" $justifyContent="space-between">
 				<NavLink to="/">
-					<img src="/src/assets/logo.png" />
+					<img src="/logo.png" />
 				</NavLink>
 				<Button handler={() => setModalVisibility({ name: "authorization", visibility: true })}>Админка</Button>
 			</Container>
