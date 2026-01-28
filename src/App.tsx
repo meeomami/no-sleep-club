@@ -5,7 +5,6 @@ import Modals from "./components/Modal/Modals";
 import { useActions } from "./hooks/useActions";
 import { supabase } from "./services/supabase.services";
 import type { Post } from "./store/slices/postSlice";
-import { useAppSelector } from "./hooks/useAppSelector";
 
 function App() {
 	const { setPosts, closeAllModals } = useActions();

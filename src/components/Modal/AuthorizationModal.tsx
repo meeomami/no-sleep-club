@@ -22,9 +22,9 @@ const AuthorizationContent = styled(Flex)`
 	width: 360px;
 `;
 
-const ErrorMessage = styled.div`
+/* const ErrorMessage = styled.div`
 	color: #dd5b5b;
-`;
+`; */
 
 const AuthorizationModal: FC = () => {
 	const login = useInput("");

@@ -4,7 +4,6 @@ import { AnimatePresence as AP, motion as m } from "framer-motion";
 import { useActions } from "@/hooks/useActions";
 import styled from "styled-components";
 import Flex from "../UI/Flex";
-import { useAppSelector } from "@/hooks/useAppSelector";
 
 interface ModalWrapperProps {
 	name: keyof ModalState;
