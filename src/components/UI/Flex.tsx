@@ -9,6 +9,7 @@ export interface FlexProps {
 	$reverse?: boolean;
 	$alignItems?: "flex-start" | "flex-end" | "center" | "baseline";
 	$justifyContent?: "flex-start" | "flex-end" | "center" | "space-between";
+	$alignSelf?: "flex-start" | "flex-end" | "center";
 	$border?: string;
 	$borderRadius?: number;
 	$gap?: GapProperty;
@@ -30,6 +31,7 @@ const Flex = styled.div<FlexProps>`
 	${({ $column, $reverse }) =>
 		($column || $reverse) && `flex-direction: ${$column ? "column" : "row"}${$reverse ? "-reverse" : ""}`};
 	${({ $alignItems }) => $alignItems && `align-items: ${$alignItems}`};
+	${({ $alignSelf }) => $alignSelf && `align-self: ${$alignSelf}`};
 	${({ $justifyContent }) => $justifyContent && `justify-content: ${$justifyContent}`};
 	${({ $border }) => $border && `border: ${$border}`};
 	${({ $borderRadius }) => $borderRadius && `border-radius: ${$borderRadius}`};

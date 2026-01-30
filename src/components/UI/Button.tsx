@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Flex from "./Flex";
 
 interface ButtonProps {
-	handler?: () => void;
+	handler?: (() => void) | ((event: any) => void);
 	children?: ReactNode;
 }
 

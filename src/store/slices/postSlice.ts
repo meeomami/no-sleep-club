@@ -25,13 +25,19 @@ const postSlice = createSlice({
 			state.posts = action.payload.sort((a, b) => new Date(b.lastModified).getTime() - new Date(a.lastModified).getTime());
 		},
 		addPost(state, action: PayloadAction<Post>) {
-			state.posts = [...state.posts, action.payload];
+			state.posts = [...state.posts, action.payload].sort(
+				(a, b) => new Date(b.lastModified).getTime() - new Date(a.lastModified).getTime(),
+			);
 		},
 		removePost(state, action: PayloadAction<number>) {
-			state.posts = state.posts.filter((post) => post.postId !== action.payload);
+			state.posts = state.posts
+				.filter((post) => post.postId !== action.payload)
+				.sort((a, b) => new Date(b.lastModified).getTime() - new Date(a.lastModified).getTime());
 		},
 		editPost(state, action: PayloadAction<Post>) {
-			state.posts = state.posts.map((post) => (post.postId === action.payload.postId ? action.payload : post));
+			state.posts = state.posts
+				.map((post) => (post.postId === action.payload.postId ? action.payload : post))
+				.sort((a, b) => new Date(b.lastModified).getTime() - new Date(a.lastModified).getTime());
 		},
 	},
 });

@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { AnimatePresence as AP, motion as m } from "framer-motion";
 import Loader from "@/components/UI/Loader";
 import Post from "@/components/Post";
+import Button from "@/components/UI/Button";
+import { useNavigate } from "react-router-dom";
 
 const LoaderContainer = styled(m.div)`
 	display: flex;
@@ -25,18 +27,25 @@ const PostCounter = styled.div`
 const Posts: FC = () => {
 	const { posts } = useAppSelector((state) => state.post);
 
+	const { authorizationToken } = useAppSelector((state) => state.auth);
+
 	const transitions = {
 		initial: { opacity: 0, scale: 0.95 },
 		animate: { opacity: 1, scale: 1 },
 		exit: { opacity: 0, scale: 0.95 },
 	};
 
+	const navigate = useNavigate();
+
 	return (
 		<AP>
 			<Container $padding={["calc(20px + 30 * ((100vw - 320px) / (1920 - 320)))", 20]} $column>
 				{posts.length > 0 ? (
 					<Flex $column $gap={32}>
-						<PostCounter>Всего постов: {posts.length}</PostCounter>
+						<Flex $gap={20}>
+							<PostCounter>Всего постов: {posts.length}</PostCounter>
+							{authorizationToken && <Button handler={() => navigate("/new-post")}>Создать пост</Button>}
+						</Flex>
 						<m.div {...transitions}>
 							<Flex $column $gap={20}>
 								{posts.map((post, index) => (

@@ -5,9 +5,11 @@ import Modals from "./components/Modal/Modals";
 import { useActions } from "./hooks/useActions";
 import { supabase } from "./services/supabase.services";
 import type { Post } from "./store/slices/postSlice";
+import { useLocalStorage } from "./hooks/useLocalStorage";
+import type { Session } from "@supabase/supabase-js";
 
 function App() {
-	const { setPosts, closeAllModals } = useActions();
+	const { setPosts, closeAllModals, login } = useActions();
 
 	const getPosts = async (): Promise<Post[]> => {
 		const { data, error } = await supabase.from("posts").select("*");
@@ -21,11 +23,17 @@ function App() {
 		return data as Post[];
 	};
 
-	useEffect(() => {
-		getPosts();
-	}, []);
+	useLocalStorage(`sb-${import.meta.env.VITE_SUPABASE_PROJECT_REF}-auth-token`, (data: Session) => {
+		if (data && data.access_token) {
+			login(data.access_token);
+		}
+	});
 
 	useEffect(() => {
+		/* load posts */
+		getPosts();
+
+		/* handler to close modal's on Escape's key press */
 		const closeModalHandler = (event: KeyboardEvent) => {
 			if (event.key === "Escape") closeAllModals();
 		};

@@ -11,6 +11,8 @@ const PostImageContainer = styled.div`
 	width: 100%;
 	border-bottom: calc(2px + 1 * ((100vw - 320px) / (1920 - 320))) solid #1f1f1f;
 	overflow: hidden;
+	cursor: pointer;
+
 	img {
 		width: 100%;
 		height: 100%;
@@ -163,15 +165,17 @@ const Post: FC<PostI> = ({ postId, postImage, title, content, attachedImages, la
 					))}
 				</Flex>
 			</Flex>
-			<AttachedImagesContainer>
-				<Flex $gap={8}>
-					{attachedImages.map((image, index) => (
-						<AttachedImageContainer onClick={(event) => openImageHandler(event, image)} key={index}>
-							<img src={image} />
-						</AttachedImageContainer>
-					))}
-				</Flex>
-			</AttachedImagesContainer>
+			{attachedImages.length > 0 && (
+				<AttachedImagesContainer>
+					<Flex $gap={8}>
+						{attachedImages.map((image, index) => (
+							<AttachedImageContainer onClick={(event) => openImageHandler(event, image)} key={index}>
+								<img src={image} />
+							</AttachedImageContainer>
+						))}
+					</Flex>
+				</AttachedImagesContainer>
+			)}
 			<Footer $padding={24} $margin={[-12, 0, 0]}>
 				{formattedModifiedDate}
 			</Footer>

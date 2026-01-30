@@ -1,5 +1,10 @@
+import { hexToRgb } from "@/utils/hexToRgb";
 import type { FC } from "react";
 import styled, { keyframes } from "styled-components";
+
+interface LoaderProps {
+	$color?: string;
+}
 
 const pulse = keyframes`
 	0%,
@@ -13,10 +18,10 @@ const pulse = keyframes`
 	}
 `;
 
-const DotSpinner = styled.div`
+const DotSpinner = styled.div<LoaderProps>`
 	--uib-size: 2.8rem;
 	--uib-speed: 0.9s;
-	--uib-color: #183153;
+	--uib-color: ${({ $color }) => $color || "#183153"};
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -25,7 +30,7 @@ const DotSpinner = styled.div`
 	width: var(--uib-size);
 `;
 
-const Dot = styled.div`
+const Dot = styled.div<LoaderProps>`
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -44,7 +49,7 @@ const Dot = styled.div`
 		transform: scale(0);
 		opacity: 0.5;
 		animation: ${pulse} calc(var(--uib-speed) * 1.111) ease-in-out infinite;
-		box-shadow: 0 0 20px rgba(18, 31, 53, 0.3);
+		box-shadow: 0 0 20px ${({ $color }) => ($color ? `rgba(${hexToRgb($color).join(", ")}, 0.3)` : $color)};
 	}
 
 	&:nth-child(2) {
@@ -104,11 +109,11 @@ const Dot = styled.div`
 	}
 `;
 
-const Loader: FC = () => {
+const Loader: FC<LoaderProps> = ({ $color }) => {
 	return (
-		<DotSpinner>
+		<DotSpinner $color={$color}>
 			{new Array(8).fill(0).map((_, index) => (
-				<Dot key={index} />
+				<Dot $color={$color} key={index} />
 			))}
 		</DotSpinner>
 	);
