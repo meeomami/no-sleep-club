@@ -1,13 +1,16 @@
 import type { FC, ReactNode } from "react";
 import styled from "styled-components";
 import Flex from "./Flex";
+import React from "react";
+import { rv } from "@/utils/rv";
 
 interface ButtonProps {
 	handler?: (() => void) | ((event: any) => void);
+	$icon?: FC;
 	children?: ReactNode;
 }
 
-const StyledButton = styled(Flex).attrs({ as: "button" })`
+const StyledButton = styled(Flex).attrs({ as: "button" })<{ $icon: boolean }>`
 	font-weight: 500;
 	font-size: calc(14px + 4 * ((100vw - 320px) / (1920 - 320)));
 	color: #eff2f9;
@@ -28,17 +31,28 @@ const StyledButton = styled(Flex).attrs({ as: "button" })`
 			border-color: transparent;
 		}
 	}
+
+	svg {
+		width: ${rv(32, 20)};
+		height: ${rv(32, 20)};
+	}
+
+	svg,
+	svg path {
+		fill: currentColor;
+	}
 `;
 
-const Button: FC<ButtonProps> = ({ handler, children }) => {
+const Button: FC<ButtonProps> = ({ handler, $icon, children }) => {
 	return (
 		<StyledButton
-			$padding={["calc(8px + 12 * ((100vw - 320px) / (1920 - 320)))", "calc(12px + 12 * ((100vw - 320px) / (1920 - 320)))"]}
+			$icon={Boolean($icon)}
+			$padding={[!$icon ? rv(20, 8) : rv(13, 5), !$icon ? rv(24, 12) : rv(16, 6)]}
 			$border="calc(2px + 1 * ((100vw - 320px) / (1920 - 320))) solid #1f1f1f"
 			$bgc="#6E808E"
 			onClick={handler}
 		>
-			{children}
+			{$icon ? React.createElement($icon) : children}
 		</StyledButton>
 	);
 };

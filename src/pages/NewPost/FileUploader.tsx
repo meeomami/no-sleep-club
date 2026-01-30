@@ -131,8 +131,6 @@ const FileUploader: FC<FileUploaderProps> = ({ $name, $stateFiles, $setStateFile
 		setFiles([...files, ...event.target.files].filter((file) => !isSizeLimit(file.size)));
 	};
 
-	console.log($stateFiles);
-
 	useEffect(() => {
 		$setStateFiles(files);
 		setPreviews(files.map((file) => URL.createObjectURL(file)));

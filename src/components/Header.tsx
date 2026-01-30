@@ -9,6 +9,8 @@ import { useActions } from "@/hooks/useActions";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { supabase } from "@/services/supabase.services";
 
+import TelegramIcon from "@icons/telegram.svg?react";
+
 const StyledHeader = styled(Flex)`
 	border-bottom: calc(2px + 1 * ((100vw - 320px) / (1920 - 320))) solid #1f1f1f;
 `;
@@ -33,11 +35,14 @@ const Header: FC = () => {
 				<NavLink to="/">
 					<StyledLogo src="/logo.png" />
 				</NavLink>
-				{!authorizationToken ? (
-					<Button handler={() => setModalVisibility({ name: "authorization", visibility: true })}>Админка</Button>
-				) : (
-					<Button handler={handleLogOut}>Выйти</Button>
-				)}
+				<Flex $gap={20}>
+					<Button handler={() => window.open("https://t.me/no_sleep_club_server", "_blank", "noreferrer")} $icon={TelegramIcon} />
+					{!authorizationToken ? (
+						<Button handler={() => setModalVisibility({ name: "authorization", visibility: true })}>Админка</Button>
+					) : (
+						<Button handler={handleLogOut}>Выйти</Button>
+					)}
+				</Flex>
 			</Container>
 		</StyledHeader>
 	);
